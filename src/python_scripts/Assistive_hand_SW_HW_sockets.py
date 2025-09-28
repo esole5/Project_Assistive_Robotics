@@ -111,7 +111,7 @@ def Show_object():
     robot.MoveL(Control_2_target, True)
     robot.setSpeed(30)
     robot.MoveL(Show_target, True)
-    # S'hauria de posar un stop aqui perque li dongui temps al metge d'agafar l'objecte
+    time.sleep(3)
     print("The object has been gived, FINISHED")
     if robot_is_connected:
         print("Give5 REAL UR5e")
