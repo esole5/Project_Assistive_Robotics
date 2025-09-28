@@ -88,11 +88,11 @@ def Pick_object():
     print("")
     robot.setSpeed(100)
     robot.MoveL(Control_1_target, True)
-    robot.setSpeed(80)
+    robot.setSpeed(25)
     robot.MoveL(Pick_target, True)
     # Petit stop per agafar l'objecte
     time.sleep(1)
-    robot.setSpeed(100)
+    robot.setSpeed(80)
     robot.MoveL(Control_1_target, True)
     print("An object has been picked!")
     if robot_is_connected:
