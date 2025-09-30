@@ -35,7 +35,7 @@ def Init():
     robot.MoveJ(Init_target, True)
     print("Init_target REACHED")
 
-#Move to pick up the object
+# Move to pick up the object
 def Pick_object():
     print("")
     robot.setSpeed(100)
@@ -48,7 +48,7 @@ def Pick_object():
     robot.MoveL(Control_1_target, True)
     print("An object has been picked!")
 
-#Move to show the object to the surgeon 
+# Move to show the object to the surgeon 
 def Show_object():
     robot.setSpeed(100)
     robot.MoveL(Control_2_target, True)
