@@ -121,7 +121,6 @@ def Show_object():
         send_ur_script(movel_control_2)
         receive_response(timel)
         send_ur_script(movel_show)
-        send_ur_script("sleep(2.0)\n")
         receive_response(timel)
 
 # Confirmation dialog to close RoboDK
