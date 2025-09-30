@@ -41,10 +41,10 @@ timel = 4
 # RoboDK dona les coordenades en mm i graus pero en URScript necessitem m i rad
 set_tcp = "set_tcp(p[0.000000, 0.000000, 0.050000, 0.000000, 0.000000, 0.000000])"
 movej_init = f"movej(p[0.000000, -0.400000, 0.500000, 1.570796, 0.000000, 0.000000],1.20000,0.75000,{accel_mss},{speed_ms},{timel},0.000)"
-movel_control_1 = f"movel(p[-0.370000, -0.550000, 0.300000, 1.246816, -1.148274, 1.148274],{accel_mss},{speed_ms},{timel/2},0.000)"
-movel_pick = f"movel(p[-0.370000, -0.550000, 0.100000, 1.246817, -1.148274, 1.148274],{accel_mss},{speed_ms},{timel},0.000)"
-movel_control_2 = f"movel(p[0.370000, -0.550000, 0.300000, 1.246816, -1.148274, 1.148274],{accel_mss},{speed_ms},{timel/2},0.000)"
-movel_show = f"movel(p[0.370000, -0.550000, 0.300000, 1.230584, 1.175535, -1.175509],{accel_mss},{speed_ms},{timel/2},0.000)"
+movel_control_1 = f"movel(p[-0.370000, -0.550000, 0.300000, 1.246816, -1.148274, 1.148274],{accel_mss},{speed_ms},{timel},0.000)"
+movel_pick = f"movel(p[-0.370000, -0.550000, 0.100000, 1.246817, -1.148274, 1.148274],{accel_mss},{speed_ms},{2*timel},0.000)"
+movel_control_2 = f"movel(p[0.370000, -0.550000, 0.300000, 1.246816, -1.148274, 1.148274],{accel_mss},{speed_ms},{timel},0.000)"
+movel_show = f"movel(p[0.370000, -0.550000, 0.300000, 1.230584, 1.175535, -1.175509],{accel_mss},{speed_ms},{timel},0.000)"
 
 # Check robot connection
 def check_robot_port(ip, port):
