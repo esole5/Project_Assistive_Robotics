@@ -18,10 +18,10 @@ robot = RDK.Item("UR5e")
 base = RDK.Item("UR5e Base")
 tool = RDK.Item("Hand")
 Init_target = RDK.Item("Init")
-App_shake_target = RDK.Item("App_shake")
-Shake_target = RDK.Item("Shake")
-App_give5_target = RDK.Item("App_give5")
-Give5_target = RDK.Item("Give5")
+Control_1_target = RDK.Item('Control_1')
+Pick_target = RDK.Item('Pick')
+Control_2_target = RDK.Item('Control_2')
+Show_target = RDK.Item('Show')
 
 # Set robot frame, tool and speed
 robot.setPoseFrame(base)
@@ -29,33 +29,41 @@ robot.setPoseTool(tool)
 robot.setSpeed(20)
 
 # Move to initial position
-def move_to_init():
+def Init():
     print("Init")
-    robot.MoveL(Init_target, True)
+    robot.setSpeed(100)
+    robot.MoveJ(Init_target, True)
     print("Init_target REACHED")
 
-# Perform handshake sequence
-def hand_shake():
-    print("Hand Shake")
-    robot.MoveL(App_shake_target, True)
-    robot.MoveL(Shake_target, True)
-    robot.MoveL(App_shake_target, True)
-    print("Hand Shake FINISHED")
+#Move to pick up the object
+def Pick_object():
+    print("")
+    robot.setSpeed(100)
+    robot.MoveL(Control_1_target, True)
+    robot.setSpeed(25)
+    robot.MoveL(Pick_target, True)
+    # Petit stop per agafar l'objecte
+    time.sleep(1)
+    robot.setSpeed(80)
+    robot.MoveL(Control_1_target, True)
+    print("An object has been picked!")
 
-# Perform "Give me 5" sequence
-def give_me_5():
-    print("Give me 5!")
-    robot.MoveL(App_give5_target, True)
-    robot.MoveL(Give5_target, True)
-    robot.MoveL(App_give5_target, True)
-    print("Give me 5! FINISHED")
+#Move to show the object to the surgeon 
+def Show_object():
+    robot.setSpeed(100)
+    robot.MoveL(Control_2_target, True)
+    robot.setSpeed(100)
+    robot.MoveL(Show_target, True)
+    #stop per ensenyar l'eina al metge
+    time.sleep(2)
+    print("The object has been gived, FINISHED")
 
 # Main sequence
 def main():
-    move_to_init()
-    hand_shake()
-    give_me_5()
-    move_to_init()
+    Init()
+    Pick_object()
+    Show_object()
+    Init()
 
 # Confirmation dialog to close RoboDK
 def confirm_close():
@@ -73,6 +81,8 @@ def confirm_close():
     else:
         RDK.CloseRoboDK()
         print("RoboDK closed without saving.")
+
+        # Confirmation dialog to close RoboDK
 
 # Run main and handle closing
 if __name__ == "__main__":
