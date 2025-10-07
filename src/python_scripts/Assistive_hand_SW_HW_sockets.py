@@ -40,11 +40,27 @@ timel = 4
 # URScript commands
 # RoboDK dona les coordenades en mm i graus pero en URScript necessitem m i rad
 set_tcp = "set_tcp(p[0.000000, 0.000000, 0.050000, 0.000000, 0.000000, 0.000000])"
-movej_init = f"movej(p[0.000000, -0.400000, 0.500000, 1.570796, 0.000000, 0.000000],{accel_mss},{speed_ms},{timel},0.000)"
-movel_control_1 = f"movel(p[-0.370000, -0.550000, 0.300000, 1.246816, -1.148274, 1.148274],{accel_mss},{speed_ms},{timel},0.000)"
-movel_pick = f"movel(p[-0.370000, -0.550000, 0.050000, 1.246817, -1.148274, 1.148274],{accel_mss},{speed_ms},{2*timel},0.000)"
-movel_control_2 = f"movel(p[0.370000, -0.550000, 0.300000, 1.246816, -1.148274, 1.148274],{accel_mss},{speed_ms},{timel},0.000)"
-movel_show = f"movel(p[0.370000, -0.550000, 0.300000, 1.230584, 1.175535, -1.175509],{accel_mss},{speed_ms},{timel},0.000)"
+# movej_init = f"movej(p[0.000000, -0.400000, 0.500000, 1.570796, 0.000000, 0.000000],{accel_mss},{speed_ms},{timel},0.000)"
+# movel_control_1 = f"movel(p[-0.370000, -0.550000, 0.300000, 1.246816, -1.148274, 1.148274],{accel_mss},{speed_ms},{timel},0.000)"
+# movel_pick = f"movel(p[-0.370000, -0.550000, 0.10000, 1.246817, -1.148274, 1.148274],{accel_mss},{speed_ms},{2*timel},0.000)"
+# movel_control_2 = f"movel(p[0.370000, -0.550000, 0.300000, 1.246816, -1.148274, 1.148274],{accel_mss},{speed_ms},{timel},0.000)"
+# movel_show = f"movel(p[0.370000, -0.550000, 0.300000, 1.230584, 1.175535, -1.175509],{accel_mss},{speed_ms},{timel},0.000)"
+
+X, Y, Z, Roll, Pitch, Yaw = Pose_2_TxyzRxyz(Init_target.Pose())
+movej_init = f"movej(p[{X/1000}, {Y/1000}, {Z/1000}, {Roll}, {Pitch}, {Yaw}], a={accel_mss}, v={speed_ms}, t={timel}, r={blend_r})"
+
+X, Y, Z, Roll, Pitch, Yaw = Pose_2_TxyzRxyz(Control_1_target.Pose())
+movel_control_1 = f"movel(p[{X/1000}, {Y/1000}, {Z/1000}, {Roll}, {Pitch}, {Yaw}], a={accel_mss}, v={speed_ms}, t={timel}, r={blend_r})"
+
+X, Y, Z, Roll, Pitch, Yaw = Pose_2_TxyzRxyz(Pick_target.Pose())
+movel_pick = f"movel(p[{X/1000}, {Y/1000}, {Z/1000}, {Roll}, {Pitch}, {Yaw}], a={accel_mss}, v={speed_ms}, t={2*timel}, r={blend_r})"
+
+X, Y, Z, Roll, Pitch, Yaw = Pose_2_TxyzRxyz(Control_2_target.Pose())
+movel_control_2 = f"movel(p[{X/1000}, {Y/1000}, {Z/1000}, {Roll}, {Pitch}, {Yaw}], a={accel_mss}, v={speed_ms}, t={timel}, r={blend_r})"
+
+X, Y, Z, Roll, Pitch, Yaw = Pose_2_TxyzRxyz(Show_target.Pose())
+movel_show = f"movel(p[{X/1000}, {Y/1000}, {Z/1000}, {Roll}, {Pitch}, {Yaw}], a={accel_mss}, v={speed_ms}, t={timel}, r={blend_r})"
+
 
 # Check robot connection
 def check_robot_port(ip, port):
